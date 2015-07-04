@@ -36,6 +36,7 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
+            player.RotateToFace();
             return this;
         }
 
