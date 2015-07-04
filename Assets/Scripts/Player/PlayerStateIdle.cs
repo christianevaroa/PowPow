@@ -36,12 +36,12 @@ namespace PlayerScripts
             }
 
             // TODO: if( crouch is pressed) { return new PlayerStateCrouching(); }
-
             return this;
         }
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
+            player.RotateToFace();
             return this;
         }
 

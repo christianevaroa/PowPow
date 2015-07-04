@@ -17,11 +17,10 @@ namespace PlayerScripts
         [Tooltip("Don't set this, it's set to half max speed in Start()")]
         public float maxCrawlSpeed;
         public float rotateSpeed;
-        public float groundRaycastDistance;
-        public float groundRaycastHeight;
+        public float groundRaycastDistance, groundRaycastHeight;
 
         [HideInInspector]
-        public Vector3 directionVector;
+        public Vector3 directionVector, lastNonZeroVector;
 
         [HideInInspector]
         public Rigidbody rb;
@@ -75,6 +74,11 @@ namespace PlayerScripts
             directionVector = Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed);
             currentSpeed = directionVector.magnitude;
 
+            if (currentSpeed > 0.000001) 
+            {
+                lastNonZeroVector = directionVector;
+            }
+
             movementState = SwitchState(movementState.Update(this));
 
             if (debugging)
@@ -115,6 +119,14 @@ namespace PlayerScripts
 
             RaycastHit hit;
             return Physics.Raycast(ray, out hit, groundRaycastDistance);
+        }
+
+        public void RotateToFace()
+        {
+            // Rotate the player towards the direction they're moving
+            Quaternion targetRotation = Quaternion.LookRotation(lastNonZeroVector);
+            targetRotation = Quaternion.RotateTowards(rb.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(targetRotation);
         }
 
         public void EnableMovement()

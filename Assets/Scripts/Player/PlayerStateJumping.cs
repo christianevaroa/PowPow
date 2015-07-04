@@ -54,6 +54,8 @@ namespace PlayerScripts
         {
             // Not actually using this at the moment
             // TODO: do it by manually setting Y-height, but need to figure out how to also maintain X/Z momentum
+
+            player.RotateToFace();
             return this;
         }
 

@@ -52,12 +52,8 @@ namespace PlayerScripts
                 velocityChange.y = 0;
 
                 player.rb.AddForce(velocityChange, ForceMode.VelocityChange);
-
-                // Rotate the player towards the direction they're moving
-                Quaternion targetRotation = Quaternion.LookRotation(player.directionVector);
-                targetRotation = Quaternion.RotateTowards(player.rb.rotation, targetRotation, player.rotateSpeed * Time.fixedDeltaTime);
-                player.rb.MoveRotation(targetRotation);
             }
+            player.RotateToFace();
             return this;
         }
 
