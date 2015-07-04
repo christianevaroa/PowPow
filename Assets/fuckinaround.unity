@@ -846,10 +846,6 @@ Prefab:
       propertyPath: getReadyTextAnimator
       value: 
       objectReference: {fileID: 1418529895}
-    - target: {fileID: 11472068, guid: 9f7b36e38c14c8849a933f7cf8ab98f2, type: 2}
-      propertyPath: countDownSeconds
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f7b36e38c14c8849a933f7cf8ab98f2, type: 2}
   m_IsPrefabParent: 0

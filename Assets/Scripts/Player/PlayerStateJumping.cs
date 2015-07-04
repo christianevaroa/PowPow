@@ -10,7 +10,7 @@ namespace PlayerScripts
         JumpTimer jumpTimer;
         Vector3 pos;
 
-        Vector3 jumpForce = new Vector3(0f, 5f, 0f);
+        Vector3 jumpForce = new Vector3(0f, 9f, 0f);    // 9 seems to be a little over 2x character height with double gravity
 
         public PlayerStateJumping()
         {
