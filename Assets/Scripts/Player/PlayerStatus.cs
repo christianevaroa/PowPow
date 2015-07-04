@@ -6,13 +6,11 @@ namespace PlayerScripts
 
     public class PlayerStatus : MonoBehaviour
     {
-        //PlayerMovement movement;
         PlayerMovementRB movement;
 
         // Use this for initialization
         void Start()
         {
-            //movement = GetComponent<PlayerMovement>();
             movement = GetComponent<PlayerMovementRB>();
         }
 
