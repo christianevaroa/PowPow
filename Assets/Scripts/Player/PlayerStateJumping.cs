@@ -24,7 +24,10 @@ namespace PlayerScripts
             // TODO manually set the player's Y-position
             //player.rb.useGravity = false;
             //jumpTimer.StartTiming();
-            player.rb.AddForce(jumpForce, ForceMode.VelocityChange);
+            if (player.controlState == PlayerMovementRB.ControlState.CONTROLLABLE)
+            {
+                player.rb.AddForce(jumpForce, ForceMode.VelocityChange);
+            }
         }
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)

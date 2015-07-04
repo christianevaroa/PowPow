@@ -16,7 +16,6 @@ namespace PlayerScripts
         void IPlayerState.EnterState(PlayerMovementRB player)
         {
             player.anim.SetBool("Falling", true);
-            player.anim.SetFloat("Speed", player.currentSpeed);
             // Minimum friction so you don't stick to walls while falling
             player.col.material.dynamicFriction = 0f;
         }
