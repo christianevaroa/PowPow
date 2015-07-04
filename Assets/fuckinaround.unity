@@ -199,6 +199,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 22499552, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499552, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499552, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499552, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11422326, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22343016, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
   m_IsPrefabParent: 0
@@ -616,28 +640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f061a8cf4f1a5cd4a850f947d97fb73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 672574938}
-  debugging: 1
-  anim: {fileID: 1828953831}
-  maxSpeed: 3
-  maxCrawlSpeed: 0
-  gravity: 1
-  rotateSpeed: 720
-  groundRaycastDistance: .300000012
-  groundRaycastHeight: .200000003
-  controller: {fileID: 0}
-  directionVector: {x: 0, y: 0, z: 0}
-  airborneDirectionVector: {x: 0, y: 0, z: 0}
-  gravityVector: {x: 0, y: 0, z: 0}
-  jumpVector: {x: 0, y: 0, z: 0}
-  currentSpeed: 0
-  xMovement: 0
-  zMovement: 0
-  crouching: 0
-  grounded: 0
-  carryState: 0
-  controlState: 0
-  movementState: 0
 --- !u!143 &1237471659
 CharacterController:
   m_ObjectHideFlags: 0
@@ -896,9 +898,4 @@ Prefab:
 --- !u!4 &1828953830 stripped
 Transform:
   m_PrefabParentObject: {fileID: 428374, guid: fa986d1af1c21e749941c8aefa1cba18, type: 2}
-  m_PrefabInternal: {fileID: 1288269599}
---- !u!95 &1828953831 stripped
-Animator:
-  m_PrefabParentObject: {fileID: 9542616, guid: fa986d1af1c21e749941c8aefa1cba18,
-    type: 2}
   m_PrefabInternal: {fileID: 1288269599}
