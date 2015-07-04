@@ -15,7 +15,7 @@ namespace PlayerScripts
         public PlayerStateJumping()
         {
             hiddenName = "JUMPING";
-            jumpTimer = new JumpTimer();
+            //jumpTimer = new JumpTimer(); //TODO: because JumpTimer is a MonoBehaviour I'll have to have it as a component on the player
         }
 
         void IPlayerState.EnterState(PlayerMovementRB player)
@@ -26,6 +26,8 @@ namespace PlayerScripts
             //jumpTimer.StartTiming();
             if (player.controlState == PlayerMovementRB.ControlState.CONTROLLABLE)
             {
+                player.anim.SetBool("Falling", true);
+                player.col.material.dynamicFriction = 0f;
                 player.rb.AddForce(jumpForce, ForceMode.VelocityChange);
             }
         }

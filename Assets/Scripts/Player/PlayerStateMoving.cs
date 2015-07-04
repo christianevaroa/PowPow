@@ -22,9 +22,9 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
         {
-            // Check if the player jumped BEFORE we check if they're grounded
+            // Check if the player jumped BEFORE we check if they aren't grounded
             // so if both happen in the same frame they can still jump
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown(player.jumpButton))
             {
                 return player.statePool.GetState("JUMPING");
             }

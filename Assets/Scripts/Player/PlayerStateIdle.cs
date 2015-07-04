@@ -26,7 +26,7 @@ namespace PlayerScripts
             {
                 return player.statePool.GetState("MOVING");
             }
-            else if (Input.GetButtonDown("Jump"))
+            else if (Input.GetButtonDown(player.jumpButton))
             {
                 return player.statePool.GetState("JUMPING");
             }

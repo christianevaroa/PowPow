@@ -14,22 +14,25 @@ namespace PlayerScripts
         public Animator anim;
 
         public float maxSpeed;
+        [Tooltip("Don't set this, it's set to half max speed in Start()")]
         public float maxCrawlSpeed;
-        public float gravity;
         public float rotateSpeed;
         public float groundRaycastDistance;
         public float groundRaycastHeight;
 
+        [HideInInspector]
         public Vector3 directionVector;
-        public Vector3 airborneDirectionVector;
 
+        [HideInInspector]
         public Rigidbody rb;
+        [HideInInspector]
         public CapsuleCollider col;
 
         public float currentSpeed { get; private set; }
         public float xMovement { get; private set; }
         public float zMovement { get; private set; }
         public float maxVelocityChange { get; private set; }
+        [HideInInspector]
         public bool crouching;
         public bool grounded { get; private set; }
 
@@ -40,6 +43,9 @@ namespace PlayerScripts
         public ControlState controlState { get; private set; }
         private IPlayerState movementState;
         public PlayerStatePool statePool { get; private set; }
+
+        [HideInInspector]
+        public string name, jumpButton, fire1Button, horizontalAxis, verticalAxis;
 
         // Use this for initialization
         void Start()
@@ -53,7 +59,6 @@ namespace PlayerScripts
             movementState = statePool.GetState("IDLE");
 
             directionVector = Vector3.zero;
-            airborneDirectionVector = Vector3.zero;
 
             maxCrawlSpeed = maxSpeed / 2f;
             maxVelocityChange = 3f;
@@ -64,8 +69,8 @@ namespace PlayerScripts
         {
             CheckGrounded();
 
-            xMovement = Input.GetAxis("Horizontal");
-            zMovement = Input.GetAxis("Vertical");
+            xMovement = Input.GetAxis(horizontalAxis);
+            zMovement = Input.GetAxis(verticalAxis);
             directionVector.Set(xMovement, 0f, zMovement);
             directionVector = Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed);
             currentSpeed = directionVector.magnitude;
@@ -120,6 +125,24 @@ namespace PlayerScripts
         public void DisableMovement()
         {
             controlState = ControlState.NOT_CONTROLLABLE;
+        }
+
+        /// <summary>
+        /// Called by PlayerStatus.Start() to assign the player's number and set up controls
+        /// </summary>
+        /// <param name="pnum">Should be between 1 and 4</param>
+        public void SetPlayer(int playerNumber)
+        {
+            if (playerNumber <= 0 || playerNumber > 4)
+            {
+                Debug.LogError(this + ": playerNumber should be 1 to 4, was: " + playerNumber);
+            }
+            name = "P" + playerNumber;
+            jumpButton = "Jump_" + name;
+            fire1Button = "Fire1_" + name;
+            horizontalAxis = "Horizontal_" + name;
+            verticalAxis = "Vertical_" + name;
+
         }
 
         void PrintDebug()
