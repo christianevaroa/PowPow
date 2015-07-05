@@ -43,7 +43,7 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
-            if (player.controlState == PlayerMovementRB.ControlState.CONTROLLABLE)
+            if (player.controlState == PlayerStatus.ControlState.CONTROLLABLE)
             {
                 // Move the player
                 Vector3 velocityChange = player.directionVector - player.rb.velocity;

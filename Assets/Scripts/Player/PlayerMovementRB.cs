@@ -4,7 +4,10 @@ using System.Collections;
 
 namespace PlayerScripts
 {
-
+    /// <summary>
+    /// Rigidbody-based player movement.
+    /// Uses a state machine & a state pool.
+    /// </summary>
     public class PlayerMovementRB : MonoBehaviour
     {
 
@@ -35,26 +38,22 @@ namespace PlayerScripts
         public bool crouching;
         public bool grounded { get; private set; }
 
-        public enum CarryState { NOT_CARRYING, CARRYING }
-        public enum ControlState { CONTROLLABLE, NOT_CONTROLLABLE }
-
-        public CarryState carryState { get; private set; }
-        public ControlState controlState { get; private set; }
+        public PlayerStatus.ControlState controlState { get { return status.controlState; } }
         private IPlayerState movementState;
         public PlayerStatePool statePool { get; private set; }
+        PlayerStatus status;
 
         [HideInInspector]
-        public string name, jumpButton, fire1Button, horizontalAxis, verticalAxis;
+        public string playerName, jumpButton, interactButton, horizontalAxis, verticalAxis;
 
         // Use this for initialization
         void Start()
         {
+            status = GetComponent<PlayerStatus>();
             statePool = new PlayerStatePool();
             rb = GetComponent<Rigidbody>();
             col = GetComponent<CapsuleCollider>();
             grounded = true;
-            carryState = CarryState.NOT_CARRYING;
-            controlState = ControlState.NOT_CONTROLLABLE;
             movementState = statePool.GetState("IDLE");
 
             directionVector = Vector3.zero;
@@ -74,7 +73,7 @@ namespace PlayerScripts
             directionVector = Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed);
             currentSpeed = directionVector.magnitude;
 
-            if (currentSpeed > 0.000001) 
+            if (currentSpeed > 0.0000001) 
             {
                 lastNonZeroVector = directionVector;
             }
@@ -131,12 +130,12 @@ namespace PlayerScripts
 
         public void EnableMovement()
         {
-            controlState = ControlState.CONTROLLABLE;
+            //controlState = ControlState.CONTROLLABLE;
         }
 
         public void DisableMovement()
         {
-            controlState = ControlState.NOT_CONTROLLABLE;
+            //controlState = ControlState.NOT_CONTROLLABLE;
         }
 
         /// <summary>
@@ -149,11 +148,11 @@ namespace PlayerScripts
             {
                 Debug.LogError(this + ": playerNumber should be 1 to 4, was: " + playerNumber);
             }
-            name = "P" + playerNumber;
-            jumpButton = "Jump_" + name;
-            fire1Button = "Fire1_" + name;
-            horizontalAxis = "Horizontal_" + name;
-            verticalAxis = "Vertical_" + name;
+            playerName = "P" + playerNumber;
+            jumpButton = "Jump_" + playerName;
+            interactButton = "Interact_" + playerName;
+            horizontalAxis = "Horizontal_" + playerName;
+            verticalAxis = "Vertical_" + playerName;
 
         }
 

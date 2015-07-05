@@ -24,7 +24,7 @@ namespace PlayerScripts
             // TODO manually set the player's Y-position
             //player.rb.useGravity = false;
             //jumpTimer.StartTiming();
-            if (player.controlState == PlayerMovementRB.ControlState.CONTROLLABLE)
+            if (player.controlState == PlayerStatus.ControlState.CONTROLLABLE)
             {
                 player.anim.SetBool("Falling", true);
                 player.col.material.dynamicFriction = 0f;
