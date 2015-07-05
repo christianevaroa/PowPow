@@ -87,6 +87,24 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &28535512 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 136326, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
+  m_PrefabInternal: {fileID: 436139477}
+--- !u!114 &28535517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 28535512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cb3bf030e01542b5795223ff41dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  interactButton: 
+  raycastDistance: .75
 --- !u!1 &229827092
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +337,10 @@ Prefab:
     - target: {fileID: 11491428, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
       propertyPath: m_VerticalAxis
       value: Vertical_P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 186460, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c15e0d245e1ac974d8e0363a07a865fc, type: 2}
@@ -652,7 +674,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 442116, guid: 7b7dd880c17675e498ce7c379a3115a5, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b7dd880c17675e498ce7c379a3115a5, type: 2}
@@ -1043,7 +1065,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422680, guid: 9f7b36e38c14c8849a933f7cf8ab98f2, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11472068, guid: 9f7b36e38c14c8849a933f7cf8ab98f2, type: 2}
       propertyPath: getReadyText
@@ -1093,7 +1115,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450370, guid: ad4dd5459d6daac40b84355c805d5933, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad4dd5459d6daac40b84355c805d5933, type: 2}

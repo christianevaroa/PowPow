@@ -9,6 +9,8 @@ namespace PlayerScripts
         [HideInInspector]
         public string playerName, interactButton;
 
+        public float raycastDistance;
+
         ThrowableMono heldObject;
         Transform heldObjectTransform;
         PlayerStatus status;
@@ -20,6 +22,10 @@ namespace PlayerScripts
         void Start()
         {
             status = GetComponent<PlayerStatus>();
+            if (raycastDistance == 0f)
+            {
+                Debug.LogWarning(this + ": Set raycastDistance in inspector");
+            }
         }
 
         // Update is called once per frame
@@ -27,13 +33,17 @@ namespace PlayerScripts
         {
             if (Input.GetButtonDown(interactButton) && controlState == PlayerStatus.ControlState.CONTROLLABLE)
             {
-
+                Debug.Log("got here " + interactButton);
+                Interact();
             }
         }
 
         void Interact()
         {
-
+            if (carryState == PlayerStatus.CarryState.NOT_CARRYING)
+            {
+                Debug.DrawRay(gameObject.transform.position + gameObject.transform.up * 0.5f, gameObject.transform.forward * raycastDistance, Color.magenta, 0.3f);
+            }
         }
 
         /// <summary>
