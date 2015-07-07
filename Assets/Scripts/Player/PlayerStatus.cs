@@ -3,20 +3,22 @@ using System.Collections;
 
 namespace PlayerScripts
 {
-
+    public enum ControlState { CONTROLLABLE, NOT_CONTROLLABLE }
+    public enum CarryState { NOT_CARRYING, CARRYING }
     public class PlayerStatus : MonoBehaviour
     {
         PlayerMovementRB movement;
         PickupCarry carry;
 
+        public bool debugging;
+
         [Tooltip("Set the player's number here (1-4)")]
         public int playerNumber;
 
-        public enum ControlState { CONTROLLABLE, NOT_CONTROLLABLE }
+        
         public ControlState controlState { get; private set; }
-
-        public enum CarryState { NOT_CARRYING, CARRYING }
-        public CarryState carryState { get; private set; }
+        
+        public CarryState carryState { get; set; }
 
         // Use this for initialization
         void Start()
@@ -40,10 +42,15 @@ namespace PlayerScripts
 
         }
 
+        public void Interact()
+        {
+            carry.Interact();
+        }
+
         public void StartRound()
         {
-            controlState = ControlState.CONTROLLABLE;
-            movement.EnableMovement();
+            EnableMovement();
+            // Do some other stuff
         }
 
         public void EnableMovement()

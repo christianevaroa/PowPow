@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IThrowable : MonoBehaviour {
+public class IThrowable {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Update(GameObject carrier);
+    void CheckGrounded();
+
 }

@@ -33,16 +33,35 @@ namespace PlayerScripts
         {
             if (Input.GetButtonDown(interactButton) && controlState == PlayerStatus.ControlState.CONTROLLABLE)
             {
-                Debug.Log("got here " + interactButton);
                 Interact();
             }
         }
 
-        void Interact()
+        public void Interact()
         {
             if (carryState == PlayerStatus.CarryState.NOT_CARRYING)
             {
-                Debug.DrawRay(gameObject.transform.position + gameObject.transform.up * 0.5f, gameObject.transform.forward * raycastDistance, Color.magenta, 0.3f);
+                if (status.debugging)
+                {
+                    Debug.DrawRay(transform.position + transform.up * 0.5f, transform.forward * raycastDistance, Color.magenta, 0.3f);
+                }
+
+                RaycastHit hit;
+                Ray pickupRay = new Ray(transform.position + transform.up * 0.5f, transform.forward);
+                if (Physics.Raycast(pickupRay, out hit, raycastDistance))
+                {
+                    if (hit.collider.tag == "Throwable")
+                    {
+                        GameObject obj = hit.collider.gameObject;
+                        heldObject = obj.GetComponent<ThrowableMono>();
+                        heldObjectTransform = obj.transform;
+                        status.carryState = PlayerStatus.CarryState.CARRYING;
+
+                        Debug.Log("Picked up: " + obj + ",\n"
+                            + obj.tag + "\n" + status.carryState);
+                    }
+                }
+
             }
         }
 

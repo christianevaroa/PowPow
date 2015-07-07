@@ -22,7 +22,7 @@ namespace PlayerScripts
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
         {
 
-            if (player.controlState == PlayerStatus.ControlState.CONTROLLABLE && player.directionVector.sqrMagnitude != 0)
+            if (player.controlState == ControlState.CONTROLLABLE && player.directionVector.sqrMagnitude != 0)
             {
                 return player.statePool.GetState("MOVING");
             }
@@ -41,7 +41,7 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
-            if (player.controlState == PlayerStatus.ControlState.CONTROLLABLE)
+            if (player.controlState == ControlState.CONTROLLABLE)
             {
                 player.RotateToFace();
             }

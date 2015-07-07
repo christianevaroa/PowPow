@@ -12,7 +12,7 @@ namespace PlayerScripts
     {
 
         public Text debugText;
-        public bool debugging;
+        public bool debugging { get { return status.debugging; } }
 
         public Animator anim;
 
@@ -38,7 +38,7 @@ namespace PlayerScripts
         public bool crouching;
         public bool grounded { get; private set; }
 
-        public PlayerStatus.ControlState controlState { get { return status.controlState; } }
+        public ControlState controlState { get { return status.controlState; } }
         private IPlayerState movementState;
         public PlayerStatePool statePool { get; private set; }
         PlayerStatus status;
@@ -128,14 +128,9 @@ namespace PlayerScripts
             rb.MoveRotation(targetRotation);
         }
 
-        public void EnableMovement()
+        public void Interact()
         {
-            //controlState = ControlState.CONTROLLABLE;
-        }
-
-        public void DisableMovement()
-        {
-            //controlState = ControlState.NOT_CONTROLLABLE;
+            status.Interact();
         }
 
         /// <summary>

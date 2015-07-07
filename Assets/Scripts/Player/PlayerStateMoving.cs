@@ -32,7 +32,12 @@ namespace PlayerScripts
             {
                 return player.statePool.GetState("FALLING");
             }
+            else if (Input.GetButtonDown(player.interactButton))
+            {
+                player.Interact();
+            }
 
+            // Set animator speed and go to Idle state if not moving
             player.anim.SetFloat("Speed", player.currentSpeed);
             if (player.directionVector.sqrMagnitude == 0)
             {
@@ -43,7 +48,7 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
-            if (player.controlState == PlayerStatus.ControlState.CONTROLLABLE)
+            if (player.controlState == ControlState.CONTROLLABLE)
             {
                 // Move the player
                 Vector3 velocityChange = player.directionVector - player.rb.velocity;
