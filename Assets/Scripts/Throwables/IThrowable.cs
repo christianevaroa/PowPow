@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IThrowable {
+public interface IThrowable {
 
     void Update(GameObject carrier);
-    void CheckGrounded();
+    void GetThrown(Vector3 direction);
 
 }

@@ -20,7 +20,6 @@ namespace PlayerScripts
 
         void IPlayerState.EnterState(PlayerMovementRB player)
         {
-            Vector3 pos = player.rb.position;
             // TODO manually set the player's Y-position
             //player.rb.useGravity = false;
             //jumpTimer.StartTiming();

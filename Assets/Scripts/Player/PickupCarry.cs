@@ -10,13 +10,14 @@ namespace PlayerScripts
         public string playerName, interactButton;
 
         public float raycastDistance;
+        public Transform carryPosition;
 
         ThrowableMono heldObject;
         Transform heldObjectTransform;
         PlayerStatus status;
 
-        public PlayerStatus.ControlState controlState { get { return status.controlState; } }
-        public PlayerStatus.CarryState carryState { get { return status.carryState; } }
+        public ControlState controlState { get { return status.controlState; } }
+        public CarryState carryState { get { return status.carryState; } }
 
         // Use this for initialization
         void Start()
@@ -31,7 +32,7 @@ namespace PlayerScripts
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetButtonDown(interactButton) && controlState == PlayerStatus.ControlState.CONTROLLABLE)
+            if (Input.GetButtonDown(interactButton) && controlState == ControlState.CONTROLLABLE)
             {
                 Interact();
             }
@@ -39,7 +40,7 @@ namespace PlayerScripts
 
         public void Interact()
         {
-            if (carryState == PlayerStatus.CarryState.NOT_CARRYING)
+            if (carryState == CarryState.NOT_CARRYING)
             {
                 if (status.debugging)
                 {
@@ -53,9 +54,11 @@ namespace PlayerScripts
                     if (hit.collider.tag == "Throwable")
                     {
                         GameObject obj = hit.collider.gameObject;
+                        Debug.Log(hit.collider.gameObject + ", " + obj);
                         heldObject = obj.GetComponent<ThrowableMono>();
                         heldObjectTransform = obj.transform;
-                        status.carryState = PlayerStatus.CarryState.CARRYING;
+                        status.carryState = CarryState.CARRYING;
+                        heldObject.BeInteractedWith(gameObject, carryPosition);
 
                         Debug.Log("Picked up: " + obj + ",\n"
                             + obj.tag + "\n" + status.carryState);
