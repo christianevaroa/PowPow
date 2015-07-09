@@ -128,11 +128,6 @@ namespace PlayerScripts
             rb.MoveRotation(targetRotation);
         }
 
-        public void Interact()
-        {
-            status.Interact();
-        }
-
         /// <summary>
         /// Called by PlayerStatus.Start() to assign the player's number and set up controls
         /// </summary>
@@ -149,6 +144,11 @@ namespace PlayerScripts
             horizontalAxis = "Horizontal_" + playerName;
             verticalAxis = "Vertical_" + playerName;
 
+        }
+
+        public void Interact()
+        {
+            status.Interact();
         }
 
         void PrintDebug()

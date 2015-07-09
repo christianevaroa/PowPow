@@ -440,6 +440,7 @@ GameObject:
   - 136: {fileID: 13669942}
   - 54: {fileID: 5481160}
   - 114: {fileID: 11448086}
+  - 114: {fileID: 11489000}
   m_Layer: 0
   m_Name: PlayerRB
   m_TagString: Player
@@ -773,6 +774,21 @@ GameObject:
   - 4: {fileID: 440262}
   m_Layer: 0
   m_Name: f_index.03.R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &168996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 471356}
+  m_Layer: 0
+  m_Name: HeldObjectPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1168,10 +1184,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 414912}
+  - {fileID: 471356}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &414444
@@ -1839,6 +1856,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 414912}
   m_RootOrder: 6
+--- !u!4 &471356
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.2019999, z: .150000006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 413990}
+  m_RootOrder: 1
 --- !u!4 &471492
 Transform:
   m_ObjectHideFlags: 1
@@ -2100,19 +2129,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugText: {fileID: 0}
-  debugging: 1
   anim: {fileID: 9516186}
   maxSpeed: 3
   maxCrawlSpeed: 0
-  gravity: 1
   rotateSpeed: 720
   groundRaycastDistance: .300000012
   groundRaycastHeight: .200000003
   directionVector: {x: 0, y: 0, z: 0}
-  airborneDirectionVector: {x: 0, y: 0, z: 0}
+  lastNonZeroVector: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
   crouching: 0
+  playerName: 
+  jumpButton: 
+  interactButton: 
+  horizontalAxis: 
+  verticalAxis: 
 --- !u!114 &11479860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2124,6 +2156,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39b5c171828d5448a99bcab263a7413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugging: 1
+  playerNumber: 1
+--- !u!114 &11489000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cb3bf030e01542b5795223ff41dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  interactButton: 
+  raycastDistance: .75
+  throwStrength: 100
+  carryPosition: {fileID: 471356}
 --- !u!136 &13669942
 CapsuleCollider:
   m_ObjectHideFlags: 1

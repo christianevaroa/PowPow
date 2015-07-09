@@ -14,20 +14,31 @@ public class ThrowableMono : MonoBehaviour {
     Rigidbody rb;
     float height;
 
+    public Transform leftIKHandle;
+    public Transform rightIKHandle;
+
     string thrower;
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("transform.parent: " + transform.parent);
         beingCarried = CarriedState.NOT_CARRIED;
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+
+        if (leftIKHandle == null || rightIKHandle == null)
+        {
+            Debug.LogWarning("IK handles are not set for " + gameObject.name);
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (beingCarried == CarriedState.CARRIED)
+        if (beenThrown == ThrownState.THROWN)
         {
-            // TODO: change position to be based upon size of object
+            if (rb.velocity.sqrMagnitude == 0f)
+            {
+                beenThrown = ThrownState.NOT_THROWN;
+            }
         }
 	}
 
@@ -40,10 +51,34 @@ public class ThrowableMono : MonoBehaviour {
     {
         if (beingCarried == CarriedState.NOT_CARRIED)
         {
+            // Being picked up
             beingCarried = CarriedState.CARRIED;
+            rb.isKinematic = true;
             holder = actor;
             transform.position = pos.position;
             transform.parent = pos;
+            Debug.Log("transform.parent: " + transform.parent);
+        }
+    }
+
+    public void GetThrown(Vector3 direction)
+    {
+        if (beingCarried == CarriedState.CARRIED)
+        {
+            beenThrown = ThrownState.THROWN;
+            beingCarried = CarriedState.NOT_CARRIED;
+            transform.parent = null;
+            rb.isKinematic = false;
+            rb.AddForce(direction, ForceMode.VelocityChange);
+            Debug.Log("transform.parent: " + transform.parent);
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (beenThrown == ThrownState.THROWN)
+        {
+
         }
     }
 }

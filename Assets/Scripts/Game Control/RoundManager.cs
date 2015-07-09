@@ -28,28 +28,6 @@ public class RoundManager : MonoBehaviour {
 
     IEnumerator StartCountDown()
     {
-        //int countInt = countDownSeconds;
-        //float count = countDownSeconds;
-        //float roughStopTime = Time.deltaTime;
-        //while (count > roughStopTime)
-        //{
-        //    count -= Time.deltaTime;
-        //    getReadyText.text = "GET READY!\n" + count.ToString("F2");
-        //    if (Mathf.RoundToInt(count) < countInt)
-        //    {
-        //        countInt--;
-        //        if (countInt > 0)
-        //        {
-        //            ram.PlayOneShot(ram.TICK_LOW);
-        //        }
-        //        else
-        //        {
-        //            ram.PlayOneShot(ram.TICK_HIGH);
-        //        }
-                
-        //    }
-        //    yield return null;
-        //}
         int counter = countDownSeconds;
         while(counter > 0){
             getReadyText.text = "GET READY!!\n" + counter;

@@ -21,16 +21,23 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
         {
+            if (player.controlState == ControlState.CONTROLLABLE)
+            {
+                if (player.directionVector.sqrMagnitude != 0)
+                {
+                    return player.statePool.GetState("MOVING");
+                }
+                else if (Input.GetButtonDown(player.jumpButton))
+                {
+                    return player.statePool.GetState("JUMPING");
+                }
+                else if (Input.GetButtonDown(player.interactButton))
+                {
+                    player.Interact();
+                }
+            }
 
-            if (player.controlState == ControlState.CONTROLLABLE && player.directionVector.sqrMagnitude != 0)
-            {
-                return player.statePool.GetState("MOVING");
-            }
-            else if (Input.GetButtonDown(player.jumpButton))
-            {
-                return player.statePool.GetState("JUMPING");
-            }
-            else if (!player.grounded)
+            if (!player.grounded)
             {
                 return player.statePool.GetState("FALLING");
             }

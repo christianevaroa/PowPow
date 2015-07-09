@@ -10,10 +10,10 @@ namespace PlayerScripts
         public string playerName, interactButton;
 
         public float raycastDistance;
+        public float throwStrength;
         public Transform carryPosition;
 
         ThrowableMono heldObject;
-        Transform heldObjectTransform;
         PlayerStatus status;
 
         public ControlState controlState { get { return status.controlState; } }
@@ -32,10 +32,7 @@ namespace PlayerScripts
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetButtonDown(interactButton) && controlState == ControlState.CONTROLLABLE)
-            {
-                Interact();
-            }
+
         }
 
         public void Interact()
@@ -51,20 +48,23 @@ namespace PlayerScripts
                 Ray pickupRay = new Ray(transform.position + transform.up * 0.5f, transform.forward);
                 if (Physics.Raycast(pickupRay, out hit, raycastDistance))
                 {
+                    Debug.Log(hit.collider);
                     if (hit.collider.tag == "Throwable")
                     {
+                        // Object is a throwable, pick it up
                         GameObject obj = hit.collider.gameObject;
-                        Debug.Log(hit.collider.gameObject + ", " + obj);
                         heldObject = obj.GetComponent<ThrowableMono>();
-                        heldObjectTransform = obj.transform;
                         status.carryState = CarryState.CARRYING;
                         heldObject.BeInteractedWith(gameObject, carryPosition);
-
-                        Debug.Log("Picked up: " + obj + ",\n"
-                            + obj.tag + "\n" + status.carryState);
                     }
                 }
-
+            }
+            else if (carryState == CarryState.CARRYING)
+            {
+                status.carryState = CarryState.NOT_CARRYING;
+                Debug.Log(transform.forward);
+                heldObject.GetThrown(transform.forward * throwStrength);
+                heldObject = null;
             }
         }
 
