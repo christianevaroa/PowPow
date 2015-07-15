@@ -115,7 +115,7 @@ Rigidbody:
   m_GameObject: {fileID: 229827092}
   serializedVersion: 2
   m_Mass: 40
-  m_Drag: .5
+  m_Drag: .00999999978
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -522,10 +522,10 @@ Prefab:
       propertyPath: debugText
       value: 
       objectReference: {fileID: 672574938}
-    - target: {fileID: 11489000, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
-      propertyPath: throwStrength
-      value: 10
-      objectReference: {fileID: 0}
+    - target: {fileID: 11448086, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
+      propertyPath: carryPosition
+      value: 
+      objectReference: {fileID: 1812673169}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
   m_IsPrefabParent: 0
@@ -1314,15 +1314,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479860, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
       propertyPath: playerNumber
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11479860, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
-      propertyPath: debugging
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11489000, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
-      propertyPath: throwStrength
-      value: 100
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 136326, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
       propertyPath: m_IsActive
@@ -1373,6 +1365,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad4dd5459d6daac40b84355c805d5933, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1812673169 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 471356, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}
+  m_PrefabInternal: {fileID: 436139477}
 --- !u!4 &2037985137 stripped
 Transform:
   m_PrefabParentObject: {fileID: 413990, guid: 46f52939d9b3b294f8dff6ff1caaee4b, type: 2}

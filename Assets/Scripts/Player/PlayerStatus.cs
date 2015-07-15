@@ -7,8 +7,9 @@ namespace PlayerScripts
     public enum CarryState { NOT_CARRYING, CARRYING }
     public class PlayerStatus : MonoBehaviour
     {
+        public static int playerCount;
+
         PlayerMovementRB movement;
-        PickupCarry carry;
 
         public bool debugging;
 
@@ -17,15 +18,13 @@ namespace PlayerScripts
 
         
         public ControlState controlState { get; private set; }
-        
-        public CarryState carryState { get; set; }
 
         // Use this for initialization
         void Start()
         {
+            PlayerStatus.playerCount++;
             controlState = ControlState.NOT_CONTROLLABLE;
             movement = GetComponent<PlayerMovementRB>();
-            carry = GetComponent<PickupCarry>();
 
             if (playerNumber <= 0 || playerNumber > 4)
             {
@@ -33,18 +32,12 @@ namespace PlayerScripts
             }
 
             movement.SetPlayer(playerNumber);
-            carry.SetPlayer(playerNumber);
         }
 
         // Update is called once per frame
         void Update()
         {
 
-        }
-
-        public void Interact()
-        {
-            carry.Interact();
         }
 
         public void StartRound()

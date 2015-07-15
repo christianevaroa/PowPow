@@ -21,7 +21,6 @@ public class ThrowableMono : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("transform.parent: " + transform.parent);
         beingCarried = CarriedState.NOT_CARRIED;
         rb = GetComponent<Rigidbody>();
 
@@ -56,8 +55,8 @@ public class ThrowableMono : MonoBehaviour {
             rb.isKinematic = true;
             holder = actor;
             transform.position = pos.position;
+            transform.rotation = actor.transform.rotation;
             transform.parent = pos;
-            Debug.Log("transform.parent: " + transform.parent);
         }
     }
 
@@ -70,7 +69,6 @@ public class ThrowableMono : MonoBehaviour {
             transform.parent = null;
             rb.isKinematic = false;
             rb.AddForce(direction, ForceMode.VelocityChange);
-            Debug.Log("transform.parent: " + transform.parent);
         }
     }
 
@@ -78,7 +76,10 @@ public class ThrowableMono : MonoBehaviour {
     {
         if (beenThrown == ThrownState.THROWN)
         {
+            if (other.collider.gameObject.tag == "Player")
+            {
 
+            }
         }
     }
 }

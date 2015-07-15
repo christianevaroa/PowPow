@@ -10,25 +10,31 @@ namespace PlayerScripts
     /// </summary>
     public class PlayerMovementRB : MonoBehaviour
     {
-
         public Text debugText;
         public bool debugging { get { return status.debugging; } }
 
+        PlayerStatus status;
+        public ControlState controlState { get { return status.controlState; } }
+
         public Animator anim;
 
+        // Movement stuff
         public float maxSpeed;
         [Tooltip("Don't set this, it's set to half max speed in Start()")]
         public float maxCrawlSpeed;
         public float rotateSpeed;
         public float groundRaycastDistance, groundRaycastHeight;
-
         [HideInInspector]
         public Vector3 directionVector, lastNonZeroVector;
-
         [HideInInspector]
         public Rigidbody rb;
         [HideInInspector]
         public CapsuleCollider col;
+
+        // Movement state machine
+        public PlayerStatePool statePool { get; private set; }
+        IPlayerState movementState;
+        
 
         public float currentSpeed { get; private set; }
         public float xMovement { get; private set; }
@@ -38,11 +44,15 @@ namespace PlayerScripts
         public bool crouching;
         public bool grounded { get; private set; }
 
-        public ControlState controlState { get { return status.controlState; } }
-        private IPlayerState movementState;
-        public PlayerStatePool statePool { get; private set; }
-        PlayerStatus status;
+        // Picking up & carrying stuff
+        public float pickupRaycastDistance;
+        public float throwStrength;
+        public Transform carryPosition;
+        public ThrowableMono heldObject;
+        private CarryState hiddenCarryState;
+        public CarryState carryState { get { return hiddenCarryState; } private set { hiddenCarryState = value; } }
 
+        // Strings for storing Input strings
         [HideInInspector]
         public string playerName, jumpButton, interactButton, horizontalAxis, verticalAxis;
 
@@ -128,6 +138,39 @@ namespace PlayerScripts
             rb.MoveRotation(targetRotation);
         }
 
+        public void Interact()
+        {
+            if (carryState == CarryState.NOT_CARRYING)
+            {
+                if (status.debugging)
+                {
+                    Debug.DrawRay(transform.position + transform.up * 0.5f, transform.forward * pickupRaycastDistance, Color.magenta, 0.3f);
+                }
+
+                RaycastHit hit;
+                Ray pickupRay = new Ray(transform.position + transform.up * 0.5f, transform.forward);
+                if (Physics.Raycast(pickupRay, out hit, pickupRaycastDistance))
+                {
+                    Debug.Log(hit.collider);
+                    if (hit.collider.tag == "Throwable")
+                    {
+                        // Object is a throwable, pick it up
+                        GameObject obj = hit.collider.gameObject;
+                        heldObject = obj.GetComponent<ThrowableMono>();
+                        carryState = CarryState.CARRYING;
+                        heldObject.BeInteractedWith(gameObject, carryPosition);
+                    }
+                }
+            }
+            else if (carryState == CarryState.CARRYING)
+            {
+                carryState = CarryState.NOT_CARRYING;
+                Debug.Log(transform.forward);
+                heldObject.GetThrown(transform.forward * throwStrength);
+                heldObject = null;
+            }
+        }
+
         /// <summary>
         /// Called by PlayerStatus.Start() to assign the player's number and set up controls
         /// </summary>
@@ -144,11 +187,6 @@ namespace PlayerScripts
             horizontalAxis = "Horizontal_" + playerName;
             verticalAxis = "Vertical_" + playerName;
 
-        }
-
-        public void Interact()
-        {
-            status.Interact();
         }
 
         void PrintDebug()

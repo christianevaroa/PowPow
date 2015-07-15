@@ -440,7 +440,6 @@ GameObject:
   - 136: {fileID: 13669942}
   - 54: {fileID: 5481160}
   - 114: {fileID: 11448086}
-  - 114: {fileID: 11489000}
   m_Layer: 0
   m_Name: PlayerRB
   m_TagString: Player
@@ -2140,6 +2139,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   col: {fileID: 0}
   crouching: 0
+  pickupRaycastDistance: 0
+  throwStrength: 0
+  carryPosition: {fileID: 0}
+  heldObject: {fileID: 0}
   playerName: 
   jumpButton: 
   interactButton: 
@@ -2158,22 +2161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugging: 1
   playerNumber: 1
---- !u!114 &11489000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c79cb3bf030e01542b5795223ff41dd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: 
-  interactButton: 
-  raycastDistance: .75
-  throwStrength: 100
-  carryPosition: {fileID: 471356}
 --- !u!136 &13669942
 CapsuleCollider:
   m_ObjectHideFlags: 1

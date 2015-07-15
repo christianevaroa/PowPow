@@ -41,6 +41,10 @@ namespace PlayerScripts
             {
                 return player.statePool.GetState("IDLE");
             }
+            else if(player.carryState == CarryState.CARRYING && Input.GetButtonDown(player.interactButton))
+            {
+                player.Interact();
+            }
             return this;
         }
 
