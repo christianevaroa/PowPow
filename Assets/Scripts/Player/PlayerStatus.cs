@@ -58,7 +58,15 @@ namespace PlayerScripts
         public void TakeDamage(Damage d)
         {
             Debug.Log(gameObject.name + " took " + d.amount + " " + d.type + " damage.");
-            health -= d.amount;
+            if ((health -= d.amount) < 0)
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            //TODO: Die!
         }
     }
 

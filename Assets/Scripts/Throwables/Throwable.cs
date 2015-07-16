@@ -40,9 +40,10 @@ public class Throwable : MonoBehaviour {
 
     void CheckGrounded()
     {
-        if (rb.velocity.sqrMagnitude < 0.0001f)
+        if (rb.velocity == Vector3.zero)
         {
             beenThrown = ThrownState.NOT_THROWN;
+            holder = null;
         }
     }
 
@@ -76,7 +77,7 @@ public class Throwable : MonoBehaviour {
     {
         if (beenThrown == ThrownState.THROWN)
         {
-            if (other.collider.gameObject.tag == "Player")
+            if (other.collider.gameObject.tag == "Player" && other.collider.gameObject != holder)
             {
                 PlayerStatus otherPlayer = other.collider.gameObject.GetComponent<PlayerStatus>();
                 otherPlayer.TakeDamage(new Damage(10, DamageType.PHYSICAL));

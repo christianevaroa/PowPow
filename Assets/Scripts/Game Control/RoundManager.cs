@@ -12,7 +12,7 @@ public class RoundManager : MonoBehaviour {
 
     RoundAudioManager ram;
 
-    List<PlayerStatus> playerStatuses = new List<PlayerStatus>();
+    public List<PlayerStatus> playerStatuses = new List<PlayerStatus>();
 
 	// Use this for initialization
 	void Start () {
