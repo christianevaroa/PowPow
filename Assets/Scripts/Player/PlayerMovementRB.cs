@@ -48,7 +48,7 @@ namespace PlayerScripts
         public float pickupRaycastDistance;
         public float throwStrength;
         public Transform carryPosition;
-        public ThrowableMono heldObject;
+        public Throwable heldObject;
         private CarryState hiddenCarryState;
         public CarryState carryState { get { return hiddenCarryState; } private set { hiddenCarryState = value; } }
 
@@ -65,6 +65,7 @@ namespace PlayerScripts
             col = GetComponent<CapsuleCollider>();
             grounded = true;
             movementState = statePool.GetState("IDLE");
+            carryState = CarryState.NOT_CARRYING;
 
             directionVector = Vector3.zero;
 
@@ -133,9 +134,12 @@ namespace PlayerScripts
         public void RotateToFace()
         {
             // Rotate the player towards the direction they're moving
-            Quaternion targetRotation = Quaternion.LookRotation(lastNonZeroVector);
-            targetRotation = Quaternion.RotateTowards(rb.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
-            rb.MoveRotation(targetRotation);
+            if (lastNonZeroVector != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(lastNonZeroVector);
+                targetRotation = Quaternion.RotateTowards(rb.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+                rb.MoveRotation(targetRotation);
+            }
         }
 
         public void Interact()
@@ -156,7 +160,7 @@ namespace PlayerScripts
                     {
                         // Object is a throwable, pick it up
                         GameObject obj = hit.collider.gameObject;
-                        heldObject = obj.GetComponent<ThrowableMono>();
+                        heldObject = obj.GetComponent<Throwable>();
                         carryState = CarryState.CARRYING;
                         heldObject.BeInteractedWith(gameObject, carryPosition);
                     }
@@ -165,7 +169,6 @@ namespace PlayerScripts
             else if (carryState == CarryState.CARRYING)
             {
                 carryState = CarryState.NOT_CARRYING;
-                Debug.Log(transform.forward);
                 heldObject.GetThrown(transform.forward * throwStrength);
                 heldObject = null;
             }
@@ -200,9 +203,9 @@ namespace PlayerScripts
                                 //"directionVector = " + directionVector + "\n" +
                                 //"airborneDirectionVector = " + airborneDirectionVector + "\n" +
                                 //"currentSpeed = " + currentSpeed + "\n" +
-                                //"rb.velocity.magnitude = " + rb.velocity.magnitude + "\n" +
-                                "grounded = " + grounded + "\n" +
-                                "friction = " + col.material.dynamicFriction +
+                                "rb.velocity.magnitude = " + rb.velocity.magnitude + "\n" +
+                                //"grounded = " + grounded + "\n" +
+                                //"friction = " + col.material.dynamicFriction +
                                 "";
             }
             else

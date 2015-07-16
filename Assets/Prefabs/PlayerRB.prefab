@@ -2139,9 +2139,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   col: {fileID: 0}
   crouching: 0
-  pickupRaycastDistance: 0
-  throwStrength: 0
-  carryPosition: {fileID: 0}
+  pickupRaycastDistance: .5
+  throwStrength: 20
+  carryPosition: {fileID: 471356}
   heldObject: {fileID: 0}
   playerName: 
   jumpButton: 

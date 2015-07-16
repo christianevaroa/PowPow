@@ -15,8 +15,7 @@ namespace PlayerScripts
 
         [Tooltip("Set the player's number here (1-4)")]
         public int playerNumber;
-
-        
+        int health;
         public ControlState controlState { get; private set; }
 
         // Use this for initialization
@@ -54,6 +53,12 @@ namespace PlayerScripts
         public void DisableMovement()
         {
             controlState = ControlState.NOT_CONTROLLABLE;
+        }
+
+        public void TakeDamage(Damage d)
+        {
+            Debug.Log(gameObject.name + " took " + d.amount + " " + d.type + " damage.");
+            health -= d.amount;
         }
     }
 

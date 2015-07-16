@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PlayerScripts;
 
 public enum CarriedState { NOT_CARRIED, CARRIED }
 public enum ThrownState { NOT_THROWN, THROWN }
 
-public class ThrowableMono : MonoBehaviour {
+public class Throwable : MonoBehaviour {
 
-    public Collider collider;
-    public IThrowable throwableScript;
+    public Collider myCollider;
     GameObject holder;
     CarriedState beingCarried;
     ThrownState beenThrown;
@@ -34,16 +34,16 @@ public class ThrowableMono : MonoBehaviour {
 	void Update () {
         if (beenThrown == ThrownState.THROWN)
         {
-            if (rb.velocity.sqrMagnitude == 0f)
-            {
-                beenThrown = ThrownState.NOT_THROWN;
-            }
+            CheckGrounded();
         }
 	}
 
     void CheckGrounded()
     {
-
+        if (rb.velocity.sqrMagnitude < 0.0001f)
+        {
+            beenThrown = ThrownState.NOT_THROWN;
+        }
     }
 
     public void BeInteractedWith(GameObject actor, Transform pos)
@@ -78,7 +78,8 @@ public class ThrowableMono : MonoBehaviour {
         {
             if (other.collider.gameObject.tag == "Player")
             {
-
+                PlayerStatus otherPlayer = other.collider.gameObject.GetComponent<PlayerStatus>();
+                otherPlayer.TakeDamage(new Damage(10, DamageType.PHYSICAL));
             }
         }
     }
