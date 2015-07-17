@@ -7,6 +7,8 @@ public enum ThrownState { NOT_THROWN, THROWN }
 
 public class Throwable : MonoBehaviour {
 
+    public AudioClip impactClip;
+    AudioSource audioSource;
     public Collider myCollider;
     GameObject holder;
     CarriedState beingCarried;
@@ -17,12 +19,15 @@ public class Throwable : MonoBehaviour {
     public Transform leftIKHandle;
     public Transform rightIKHandle;
 
+    public int damageAmount;
+
     string thrower;
 
 	// Use this for initialization
 	void Start () {
         beingCarried = CarriedState.NOT_CARRIED;
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 
         if (leftIKHandle == null || rightIKHandle == null)
         {
@@ -40,10 +45,15 @@ public class Throwable : MonoBehaviour {
 
     void CheckGrounded()
     {
-        if (rb.velocity == Vector3.zero)
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
         {
-            beenThrown = ThrownState.NOT_THROWN;
-            holder = null;
+            if (hit.collider.gameObject.tag == "LevelGeometry" && rb.velocity == Vector3.zero)
+            {
+                beenThrown = ThrownState.NOT_THROWN;
+                holder = null;
+            }
         }
     }
 
@@ -79,8 +89,9 @@ public class Throwable : MonoBehaviour {
         {
             if (other.collider.gameObject.tag == "Player" && other.collider.gameObject != holder)
             {
+                audioSource.PlayOneShot(impactClip);
                 PlayerStatus otherPlayer = other.collider.gameObject.GetComponent<PlayerStatus>();
-                otherPlayer.TakeDamage(new Damage(10, DamageType.PHYSICAL));
+                otherPlayer.TakeDamage(new Damage(damageAmount, DamageType.PHYSICAL));
             }
         }
     }

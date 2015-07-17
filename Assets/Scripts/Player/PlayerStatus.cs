@@ -60,8 +60,9 @@ namespace PlayerScripts
         public void TakeDamage(Damage d)
         {
             Debug.Log(gameObject.name + " took " + d.amount + " " + d.type + " damage.");
-            if ((health -= d.amount) < 0)
+            if ((health -= d.amount) <= 0)
             {
+                health = 0;
                 Die();
             }
         }
@@ -69,6 +70,16 @@ namespace PlayerScripts
         public void Die()
         {
             //TODO: Die!
+            Debug.Log(this + " died.");
+            controlState = ControlState.NOT_CONTROLLABLE;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
+            RoundManager.Death();
+        }
+
+        public void Dance()
+        {
+            movement.anim.SetTrigger("Dance");
         }
     }
 

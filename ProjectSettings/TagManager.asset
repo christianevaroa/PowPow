@@ -10,6 +10,7 @@ TagManager:
   - Throwable
   - PlayerNumText
   - HPText
+  - LevelGeometry
   layers:
   - Default
   - TransparentFX

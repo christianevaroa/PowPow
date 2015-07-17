@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PlayerScripts;
 
 public class CameraTarget : MonoBehaviour
 {
 
     public float smallestFOV;
     public float largestFOV;
-    public Transform[] playerTransforms;
+    public PlayerStatus[] playerStatuses;
     Vector3 target;
 
     // Use this for initialization
     void Start()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        playerTransforms = new Transform[players.Length];
+        playerStatuses = new PlayerStatus[players.Length];
         for (int i = 0; i < players.Length; i++)
         {
-            playerTransforms[i] = players[i].transform;
+            playerStatuses[i] = players[i].GetComponent<PlayerStatus>();
         }
     }
 
@@ -39,15 +40,18 @@ public class CameraTarget : MonoBehaviour
         float maxZ = float.NegativeInfinity;
 
         // Calculate average
-        foreach (Transform t in playerTransforms)
+        foreach (PlayerStatus p in playerStatuses)
         {
-            target += t.position;
-            minX = Mathf.Min(t.position.x, minX);
-            minZ = Mathf.Min(t.position.z, minZ);
-            maxX = Mathf.Max(t.position.x, maxX);
-            maxZ = Mathf.Max(t.position.z, maxZ);
+            if (p.health > 0) 
+            {
+                target += p.transform.position;
+                minX = Mathf.Min(p.transform.position.x, minX);
+                minZ = Mathf.Min(p.transform.position.z, minZ);
+                maxX = Mathf.Max(p.transform.position.x, maxX);
+                maxZ = Mathf.Max(p.transform.position.z, maxZ);
+            } 
         }
-        target /= playerTransforms.Length;
+        target /= playerStatuses.Length;
         transform.LookAt(target);
 
         float mod = maxX - minX + maxZ - minZ;
