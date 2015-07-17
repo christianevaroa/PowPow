@@ -13,6 +13,7 @@ namespace PlayerScripts
         public Text debugText;
         public bool debugging { get { return status.debugging; } }
 
+        PlayerAudio audioScript;
         PlayerStatus status;
         public ControlState controlState { get { return status.controlState; } }
 
@@ -63,6 +64,7 @@ namespace PlayerScripts
             statePool = new PlayerStatePool();
             rb = GetComponent<Rigidbody>();
             col = GetComponent<CapsuleCollider>();
+            audioScript = GetComponent<PlayerAudio>();
             grounded = true;
             movementState = statePool.GetState("IDLE");
             carryState = CarryState.NOT_CARRYING;
@@ -171,6 +173,7 @@ namespace PlayerScripts
                 carryState = CarryState.NOT_CARRYING;
                 heldObject.GetThrown(transform.forward * throwStrength);
                 heldObject = null;
+                audioScript.Throw();
             }
         }
 

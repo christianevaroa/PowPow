@@ -10,6 +10,7 @@ namespace PlayerScripts
         public static int playerCount;
 
         PlayerMovementRB movement;
+        PlayerAudio audioScript;
 
         public bool debugging;
 
@@ -25,6 +26,7 @@ namespace PlayerScripts
             PlayerStatus.playerCount++;
             controlState = ControlState.NOT_CONTROLLABLE;
             movement = GetComponent<PlayerMovementRB>();
+            audioScript = GetComponent<PlayerAudio>();
 
             if (playerNumber <= 0 || playerNumber > 4)
             {
@@ -65,6 +67,10 @@ namespace PlayerScripts
                 health = 0;
                 Die();
             }
+            else
+            {
+                audioScript.GetHit();
+            }
         }
 
         public void Die()
@@ -74,6 +80,7 @@ namespace PlayerScripts
             controlState = ControlState.NOT_CONTROLLABLE;
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.None;
+            audioScript.Die();
             RoundManager.Death();
         }
 
