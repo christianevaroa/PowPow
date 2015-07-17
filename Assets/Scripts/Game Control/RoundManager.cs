@@ -6,18 +6,27 @@ using System.Collections.Generic;
 
 public class RoundManager : MonoBehaviour {
 
+    public Canvas HUD;
     public Text getReadyText;
     public Animator getReadyTextAnimator;
     public int countDownSeconds;
 
+    public GameObject playerPanelPrefab;
+
     RoundAudioManager ram;
 
-    public List<PlayerStatus> playerStatuses = new List<PlayerStatus>();
+    public PlayerStatus[] playerStatuses;
+    public UIPlayerInfo[] playerPanels;
+
+    void Awake()
+    {
+        ram = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<RoundAudioManager>();
+        FindPlayers();
+    }
 
 	// Use this for initialization
 	void Start () {
-        ram = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<RoundAudioManager>();
-        FindPlayers();
+        PopulateHUD();
         StartCoroutine(StartCountDown());
 	}
 	
@@ -39,12 +48,39 @@ public class RoundManager : MonoBehaviour {
         StartRound();
     }
 
+    /// <summary>
+    /// Find all the gameobjects in the scene tagged player and put their playerstatus scripts into the array
+    /// </summary>
     void FindPlayers()
     {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        playerStatuses = new PlayerStatus[players.Length];
+        for (int i = 0; i < players.Length; i++)
         {
-            playerStatuses.Add(go.GetComponent<PlayerStatus>());
-            Debug.Log("Found player: " + go);
+            PlayerStatus current = players[i].GetComponent<PlayerStatus>();
+            //HACK would be nicer to make them comparable and sort the array but ehh this works...
+            playerStatuses[current.playerNumber - 1] = current;
+        }
+    }
+
+    /// <summary>
+    /// Instantiate an HP/MP UI panel for each player
+    /// </summary>
+    void PopulateHUD()
+    {
+        playerPanels = new UIPlayerInfo[playerStatuses.Length];
+
+        float xSpacing = Screen.width / (playerStatuses.Length + 1);
+        float ySpacing = Screen.height * 0.1f;
+
+        for (int i = 0; i < playerStatuses.Length; i++)
+        {
+            Vector3 pos = new Vector3((i+1) * xSpacing, ySpacing, 0f);
+            GameObject panel = Instantiate(playerPanelPrefab, pos, Quaternion.identity) as GameObject;
+            panel.transform.SetParent(HUD.transform);
+            UIPlayerInfo panelInfo = panel.GetComponent<UIPlayerInfo>();
+            panelInfo.playerNumText.text = " P"+playerStatuses[i].playerNumber;
+            panelInfo.playerHPText.text = playerStatuses[i].health.ToString();
         }
     }
 

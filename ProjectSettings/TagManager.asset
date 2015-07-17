@@ -8,6 +8,8 @@ TagManager:
   - DebugText
   - AudioManager
   - Throwable
+  - PlayerNumText
+  - HPText
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,8 @@ namespace PlayerScripts
 
         [Tooltip("Set the player's number here (1-4)")]
         public int playerNumber;
-        int health;
+        public int startingHealth;
+        public int health;
         public ControlState controlState { get; private set; }
 
         // Use this for initialization
@@ -30,6 +31,7 @@ namespace PlayerScripts
                 Debug.LogError(this + ": playerNumber should be 1 to 4, was: " + playerNumber);
             }
 
+            health = startingHealth;
             movement.SetPlayer(playerNumber);
         }
 
