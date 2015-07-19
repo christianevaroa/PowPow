@@ -36,7 +36,10 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
-            player.RotateToFace();
+            if (player.controlState == ControlState.CONTROLLABLE)
+            {
+                player.RotateToFace();
+            }
             return this;
         }
 

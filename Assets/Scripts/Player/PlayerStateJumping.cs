@@ -50,6 +50,10 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.ProcessMovement(PlayerMovementRB player)
         {
+            if (player.controlState == ControlState.CONTROLLABLE)
+            {
+                player.RotateToFace();
+            }
             return this;
         }
 
@@ -57,8 +61,6 @@ namespace PlayerScripts
         {
             // Not actually using this at the moment
             // TODO: do it by manually setting Y-height, but need to figure out how to also maintain X/Z momentum
-
-            player.RotateToFace();
             return this;
         }
 

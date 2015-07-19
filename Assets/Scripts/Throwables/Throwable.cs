@@ -43,6 +43,10 @@ public class Throwable : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Check if the Throwable is grounded
+    /// TODO: implement a damage cooldown timer (sometimes players get collided with multiple times very quickly)
+    /// </summary>
     void CheckGrounded()
     {
         RaycastHit hit;
