@@ -103,6 +103,24 @@ namespace PlayerScripts
             movementState = SwitchState(movementState.ProcessJump(this));
         }
 
+        void OnAnimatorIK()
+        {
+            Debug.Log("hello");
+            if (carryState == CarryState.CARRYING)
+            {
+                Debug.Log("hellohello");
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                anim.SetIKPosition(AvatarIKGoal.RightHand, heldObject.rightIKHandle.position);
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                anim.SetIKPosition(AvatarIKGoal.LeftHand, heldObject.leftIKHandle.position);
+            }
+            else
+            {
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+            }
+        }
+
         IPlayerState SwitchState(IPlayerState newState)
         {
             if (newState != movementState)

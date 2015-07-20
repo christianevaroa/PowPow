@@ -99,4 +99,9 @@ public class Throwable : MonoBehaviour {
             }
         }
     }
+
+    void OnAnimatorIK()
+    {
+
+    }
 }

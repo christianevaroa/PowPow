@@ -89,5 +89,4 @@ namespace PlayerScripts
             movement.anim.SetTrigger("Dance");
         }
     }
-
 }
