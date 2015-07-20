@@ -105,12 +105,12 @@ namespace PlayerScripts
 
         void OnAnimatorIK()
         {
-            Debug.Log("hello");
+            // Set the hand positions when carrying an object
             if (carryState == CarryState.CARRYING)
             {
-                Debug.Log("hellohello");
                 anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
                 anim.SetIKPosition(AvatarIKGoal.RightHand, heldObject.rightIKHandle.position);
+
                 anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
                 anim.SetIKPosition(AvatarIKGoal.LeftHand, heldObject.leftIKHandle.position);
             }
