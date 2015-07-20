@@ -426,7 +426,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414912}
-  - 95: {fileID: 9516186}
   m_Layer: 0
   m_Name: guy
   m_TagString: Untagged
@@ -448,6 +447,7 @@ GameObject:
   - 114: {fileID: 11448086}
   - 114: {fileID: 11499292}
   - 82: {fileID: 8250860}
+  - 95: {fileID: 9507814}
   m_Layer: 0
   m_Name: PlayerRB
   m_TagString: Player
@@ -2555,13 +2555,13 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!95 &9516186
+--- !u!95 &9507814
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 135966}
+  m_GameObject: {fileID: 136326}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 499bee94d7870e84d898c2f0c4a6ac81, type: 3}
   m_Controller: {fileID: 9100000, guid: 30163390568a48b4f8d7f22e4bc56eeb, type: 2}
@@ -2584,7 +2584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugText: {fileID: 0}
-  anim: {fileID: 9516186}
+  anim: {fileID: 9507814}
   maxSpeed: 3
   maxCrawlSpeed: 0
   rotateSpeed: 720
@@ -2615,7 +2615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39b5c171828d5448a99bcab263a7413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugging: 1
+  debugging: 0
   playerNumber: 1
   startingHealth: 100
   health: 0
