@@ -29,7 +29,6 @@ public class CameraTarget : MonoBehaviour
 
     /// <summary>
     /// Average the player positions and focus on that point
-    /// TODO: calculate FOV based on how far apart players are
     /// </summary>
     void CalculateTargetAndFOV()
     {
@@ -51,7 +50,9 @@ public class CameraTarget : MonoBehaviour
                 maxZ = Mathf.Max(p.transform.position.z, maxZ);
             } 
         }
-        target /= playerStatuses.Length;
+
+        //TODO: probs not the best way
+        target /= RoundManager.playersStillAlive > 0 ? RoundManager.playersStillAlive : 1;
         transform.LookAt(target);
 
         float mod = maxX - minX + maxZ - minZ;

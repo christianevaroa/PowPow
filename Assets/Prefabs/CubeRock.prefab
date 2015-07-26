@@ -273,7 +273,7 @@ MonoBehaviour:
   myCollider: {fileID: 6584948}
   leftIKHandle: {fileID: 497798}
   rightIKHandle: {fileID: 450440}
-  damageAmount: 30
+  damageAmount: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
