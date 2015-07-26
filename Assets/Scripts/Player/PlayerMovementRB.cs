@@ -106,6 +106,7 @@ namespace PlayerScripts
         void OnAnimatorIK()
         {
             // Set the hand positions when carrying an object
+            // TODO: at the moment it's setting the "wrist" position and the hands flop around awkwardly. Fix.
             if (carryState == CarryState.CARRYING)
             {
                 anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
