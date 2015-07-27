@@ -41,13 +41,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUD: {fileID: 0}
   getReadyText: {fileID: 0}
+  timeLeftText: {fileID: 0}
   getReadyTextAnimator: {fileID: 0}
-  countDownSeconds: 1
+  countDownSeconds: 3
+  timer: 180
   playerPanelPrefab: {fileID: 175658, guid: 3b40bfb4dfdade24b9eeb3ca59116251, type: 2}
   playerStatuses:
   - {fileID: 0}
   - {fileID: 0}
   playerPanels: []
+  yOffsetPercent: .0799999982
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

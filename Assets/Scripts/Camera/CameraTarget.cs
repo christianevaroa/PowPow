@@ -19,6 +19,7 @@ public class CameraTarget : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             playerStatuses[i] = players[i].GetComponent<PlayerStatus>();
+            Debug.Log(i + ", " + playerStatuses[i]);
         }
     }
 

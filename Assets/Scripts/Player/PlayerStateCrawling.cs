@@ -2,17 +2,16 @@
 
 namespace PlayerScripts
 {
-
-    public class PlayerStateMoving : IPlayerState
+    class PlayerStateCrawling : IPlayerState
     {
 
         string hiddenName;
 
         public string name { get { return hiddenName; } set { } }
 
-        public PlayerStateMoving()
+        public PlayerStateCrawling()
         {
-            hiddenName = "MOVING";
+            hiddenName = "CRAWLING";
         }
 
         void IPlayerState.EnterState(PlayerMovementRB player)
@@ -22,27 +21,32 @@ namespace PlayerScripts
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
         {
-            // Check if the player jumped BEFORE we check if they aren't grounded
-            // so if both happen in the same frame they can still jump
-            if (Input.GetButtonDown(player.jumpButton))
-            {
-                return player.statePool.GetState("JUMPING");
-            }
-            else if (!player.grounded)
-            {
-                return player.statePool.GetState("FALLING");
-            }
-            else if (Input.GetButtonDown(player.interactButton))
-            {
-                player.Interact();
-            }
-
             // Set animator speed and then if not moving go to Idle state
             player.anim.SetFloat("Speed", player.currentSpeed);
-            if (player.directionVector.sqrMagnitude == 0)
+
+            if (player.controlState == ControlState.CONTROLLABLE)
             {
-                return player.statePool.GetState("IDLE");
+                if (player.directionVector.sqrMagnitude == 0)
+                {
+                    return player.statePool.GetState("CROUCHING");
+                }
+                if (Input.GetButtonUp(player.crouchButton))
+                {
+                    if (player.directionVector.sqrMagnitude == 0)
+                    {
+                        return player.statePool.GetState("CROUCHING");
+                    }
+                    else
+                    {
+                        return player.statePool.GetState("RUNNING");
+                    }
+                }
             }
+            else
+            {
+                return player.statePool.GetState("CROUCHING");
+            }
+            
             return this;
         }
 
@@ -67,5 +71,4 @@ namespace PlayerScripts
             return this;
         }
     }
-
 }

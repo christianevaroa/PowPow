@@ -64,6 +64,7 @@ namespace PlayerScripts
             rb = GetComponent<Rigidbody>();
             col = GetComponent<CapsuleCollider>();
             audioScript = GetComponent<PlayerAudio>();
+            crouching = false;
             grounded = true;
             movementState = statePool.GetState("IDLE");
             carryState = CarryState.NOT_CARRYING;
@@ -77,22 +78,21 @@ namespace PlayerScripts
         // Update is called once per frame
         void Update()
         {
-            if (controlState == ControlState.CONTROLLABLE) {
-                CheckGrounded();
+            CheckGrounded();
 
-                xMovement = Input.GetAxis(horizontalAxis);
-                zMovement = Input.GetAxis(verticalAxis);
-                directionVector.Set(xMovement, 0f, zMovement);
-                directionVector = Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed);
-                currentSpeed = directionVector.magnitude;
+            xMovement = Input.GetAxis(horizontalAxis);
+            zMovement = Input.GetAxis(verticalAxis);
+            directionVector.Set(xMovement, 0f, zMovement);
 
-                if (currentSpeed > 0.0000001)
-                {
-                    lastNonZeroVector = directionVector;
-                }
+            directionVector = !crouching? Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed) : Vector3.ClampMagnitude(directionVector * maxCrawlSpeed, maxCrawlSpeed);
+            currentSpeed = directionVector.magnitude;
 
-                movementState = SwitchState(movementState.Update(this));
+            if (currentSpeed > 0.0000001)
+            {
+                lastNonZeroVector = directionVector;
             }
+
+            movementState = SwitchState(movementState.Update(this));
 
             if (debugging)
                 PrintDebug();

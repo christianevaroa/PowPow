@@ -26,9 +26,8 @@ namespace PlayerScripts
             states.Add("MOVING", new PlayerStateMoving());
             states.Add("JUMPING", new PlayerStateJumping());
             states.Add("FALLING", new PlayerStateFalling());
-            //TODO: implement these
-            //states.Add("CROUCHING", new PlayerStateCrouching());
-            //states.Add("CRAWLING", new PlayerStateCrawling());
+            states.Add("CROUCHING", new PlayerStateCrouching());
+            states.Add("CRAWLING", new PlayerStateCrawling());
         }
 
         /// <summary>

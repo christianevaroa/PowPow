@@ -447,7 +447,7 @@ GameObject:
   - 114: {fileID: 11448086}
   - 114: {fileID: 11499292}
   - 82: {fileID: 8250860}
-  - 95: {fileID: 9507814}
+  - 95: {fileID: 9507406}
   m_Layer: 0
   m_Name: PlayerRB
   m_TagString: Player
@@ -2555,7 +2555,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!95 &9507814
+--- !u!95 &9507406
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -2584,7 +2584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugText: {fileID: 0}
-  anim: {fileID: 9507814}
+  anim: {fileID: 9507406}
   maxSpeed: 3
   maxCrawlSpeed: 0
   rotateSpeed: 720
@@ -2594,13 +2594,13 @@ MonoBehaviour:
   lastNonZeroVector: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
-  crouching: 0
   pickupRaycastDistance: .5
   throwStrength: 20
   carryPosition: {fileID: 471356}
   heldObject: {fileID: 0}
   playerName: 
   jumpButton: 
+  crouchButton: 
   interactButton: 
   horizontalAxis: 
   verticalAxis: 
@@ -2615,10 +2615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39b5c171828d5448a99bcab263a7413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugging: 0
-  playerNumber: 1
+  debugging: 1
+  playerNumber: 2
   startingHealth: 100
-  health: 0
 --- !u!114 &11499292
 MonoBehaviour:
   m_ObjectHideFlags: 1
