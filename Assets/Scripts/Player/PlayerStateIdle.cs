@@ -35,6 +35,11 @@ namespace PlayerScripts
                 {
                     player.Interact();
                 }
+                else if (Input.GetButtonDown(player.crouchButton))
+                {
+                    player.crouching = true;
+                    return player.statePool.GetState("CROUCHING");
+                }
             }
 
             if (!player.grounded)

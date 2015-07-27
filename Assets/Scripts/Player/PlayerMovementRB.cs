@@ -41,8 +41,7 @@ namespace PlayerScripts
         public float xMovement { get; private set; }
         public float zMovement { get; private set; }
         public float maxVelocityChange { get; private set; }
-        [HideInInspector]
-        public bool crouching;
+        public bool crouching { get; set; }
         public bool grounded { get; private set; }
 
         // Picking up & carrying stuff
@@ -55,7 +54,7 @@ namespace PlayerScripts
 
         // Strings for storing Input strings
         [HideInInspector]
-        public string playerName, jumpButton, interactButton, horizontalAxis, verticalAxis;
+        public string playerName, jumpButton, crouchButton, interactButton, horizontalAxis, verticalAxis;
 
         // Use this for initialization
         void Start()
@@ -78,20 +77,22 @@ namespace PlayerScripts
         // Update is called once per frame
         void Update()
         {
-            CheckGrounded();
+            if (controlState == ControlState.CONTROLLABLE) {
+                CheckGrounded();
 
-            xMovement = Input.GetAxis(horizontalAxis);
-            zMovement = Input.GetAxis(verticalAxis);
-            directionVector.Set(xMovement, 0f, zMovement);
-            directionVector = Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed);
-            currentSpeed = directionVector.magnitude;
+                xMovement = Input.GetAxis(horizontalAxis);
+                zMovement = Input.GetAxis(verticalAxis);
+                directionVector.Set(xMovement, 0f, zMovement);
+                directionVector = Vector3.ClampMagnitude(directionVector * maxSpeed, maxSpeed);
+                currentSpeed = directionVector.magnitude;
 
-            if (currentSpeed > 0.0000001) 
-            {
-                lastNonZeroVector = directionVector;
+                if (currentSpeed > 0.0000001)
+                {
+                    lastNonZeroVector = directionVector;
+                }
+
+                movementState = SwitchState(movementState.Update(this));
             }
-
-            movementState = SwitchState(movementState.Update(this));
 
             if (debugging)
                 PrintDebug();
@@ -99,8 +100,11 @@ namespace PlayerScripts
 
         void FixedUpdate()
         {
-            movementState = SwitchState(movementState.ProcessMovement(this));
-            movementState = SwitchState(movementState.ProcessJump(this));
+            if (controlState == ControlState.CONTROLLABLE)
+            {
+                movementState = SwitchState(movementState.ProcessMovement(this));
+                movementState = SwitchState(movementState.ProcessJump(this));
+            }
         }
 
         void OnAnimatorIK()
@@ -211,7 +215,7 @@ namespace PlayerScripts
             interactButton = "Interact_" + playerName;
             horizontalAxis = "Horizontal_" + playerName;
             verticalAxis = "Vertical_" + playerName;
-
+            crouchButton = "Crouch_" + playerName;
         }
 
         void PrintDebug()
