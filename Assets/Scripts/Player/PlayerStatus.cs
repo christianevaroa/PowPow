@@ -17,7 +17,7 @@ namespace PlayerScripts
         [Tooltip("Set the player's number here (1-4)")]
         public int playerNumber;
         public int startingHealth;
-        public int health;
+        public int health { get; private set; }
         public ControlState controlState { get; private set; }
 
         // Use this for initialization

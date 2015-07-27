@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using PlayerScripts;
+using System;
 
 public class CameraTarget : MonoBehaviour
 {
@@ -24,7 +25,14 @@ public class CameraTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateTargetAndFOV();
+        if (RoundManager.playersStillAlive > 1)
+        {
+            CalculateTargetAndFOV();
+        }
+        else
+        {
+            StartCoroutine(MoveToWinner());
+        }
     }
 
     /// <summary>
@@ -51,11 +59,45 @@ public class CameraTarget : MonoBehaviour
             } 
         }
 
-        //TODO: probs not the best way
+        //TODO: probably not the best way
         target /= RoundManager.playersStillAlive > 0 ? RoundManager.playersStillAlive : 1;
         transform.LookAt(target);
 
         float mod = maxX - minX + maxZ - minZ;
         Camera.main.fieldOfView= 20f + (mod * 1.5f);
+    }
+
+    IEnumerator MoveToWinner()
+    {
+        GameObject winner = FindWinner();
+        // TODO: make sure this condition is always true...
+        if (winner != null)
+        {
+            Vector3 winnerPos = winner.transform.position + Vector3.up;
+            Vector3 pos = winnerPos + (winner.transform.forward * 2);
+            Vector3 initialPos = transform.position;
+            float pct = 0f;
+            float initialFov = Camera.main.fieldOfView;
+
+            // Move camera to focus on winner over 2 seconds
+            while (transform.position != pos)
+            {
+                transform.position = Vector3.Lerp(initialPos, pos, pct);
+                transform.LookAt(winnerPos);
+                Camera.main.fieldOfView = Mathf.Lerp(initialFov, 60, pct);
+                pct += Time.deltaTime / 2;
+                yield return null;
+            }
+        }
+    }
+
+    private GameObject FindWinner()
+    {
+        foreach (PlayerStatus p in playerStatuses)
+        {
+            if (p.health > 0)
+                return p.gameObject;
+        }
+        return null;
     }
 }

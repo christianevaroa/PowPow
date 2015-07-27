@@ -23,7 +23,7 @@ public class RoundManager : MonoBehaviour {
     [HideInInspector]
     public UIPlayerInfo[] playerPanels;
 
-    bool roundrunning;
+    bool roundRunning;
     public float yOffsetPercent;
 
     void Awake()
@@ -41,7 +41,7 @@ public class RoundManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (roundrunning)
+        if (roundRunning)
         {
             // Nested if because I might check other stuff too...
             if (playersStillAlive == 1)
@@ -95,7 +95,7 @@ public class RoundManager : MonoBehaviour {
 
     void StartRound()
     {
-        roundrunning = true;
+        roundRunning = true;
         getReadyText.text = "GO!!";
         foreach (PlayerStatus p in playerStatuses)
         {
@@ -124,7 +124,7 @@ public class RoundManager : MonoBehaviour {
                 playerPanels[i].Win(false);
             }
         }
-        roundrunning = false;
+        roundRunning = false;
     }
 
     void TimerToString()
@@ -149,13 +149,13 @@ public class RoundManager : MonoBehaviour {
 
     IEnumerator RoundTimer() 
     {
-        while (roundrunning && timer > 0f)
+        while (roundRunning && timer > 0f)
         {
             TimerToString();
             timer -= Time.deltaTime;
             yield return null;
         }
-        if (roundrunning)
+        if (roundRunning)
         {
             EndRound();
         }
