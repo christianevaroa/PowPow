@@ -178,7 +178,7 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "MuscleClip 'IdleToCrouch' conversion warning: Bone length
+    animationImportWarnings: "MuscleClip 'Crouch' conversion warning: Bone length
       is different in avatar and animation\n\n     'LeftLeg' : position error = 7.696520
       mm\n\n     'LeftFoot' : position error = 15.233778 mm\n\n"
     animationRetargetingWarnings: 
@@ -194,7 +194,7 @@ ModelImporter:
       name: IdleToCrouch
       takeName: _142_TO_161_a_U1_M_P_idle2Crouch_Neutral2Crouch2Idle_Fb_p0_No_0_PJ_2
       firstFrame: 208
-      lastFrame: 261
+      lastFrame: 238
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -212,7 +212,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: SetCrouching
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 0
       maskSource: {instanceID: 0}
@@ -422,7 +429,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: .994594157
+        functionName: SetCrouching
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

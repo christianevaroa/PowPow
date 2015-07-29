@@ -200,6 +200,11 @@ namespace PlayerScripts
             }
         }
 
+        public void SetCrouching()
+        {
+            crouching = !crouching;
+        }
+
         /// <summary>
         /// Called by PlayerStatus.Start() to assign the player's number and set up controls
         /// </summary>

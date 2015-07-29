@@ -64,7 +64,6 @@ public class RoundManager : MonoBehaviour {
         {
             PlayerStatus current = players[i].GetComponent<PlayerStatus>();
             //HACK: would be nicer to make them comparable and sort the array but ehh this works...
-            Debug.Log(players.Length + " players[" + i + "] = " + players[i]);
             playerStatuses[current.playerNumber - 1] = current;
 
             playersStillAlive++;
@@ -114,7 +113,6 @@ public class RoundManager : MonoBehaviour {
         }
         for (int i = 0; i < playerStatuses.Length; i++)
         {
-            Debug.Log("panels: " + playerPanels[i] + ", statuses: " + playerStatuses[i]);
             if (playerStatuses[i].health > 0) 
             {
                 playerPanels[i].Win(true);

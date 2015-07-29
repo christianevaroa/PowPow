@@ -2616,7 +2616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugging: 1
-  playerNumber: 2
+  playerNumber: 1
   startingHealth: 100
 --- !u!114 &11499292
 MonoBehaviour:

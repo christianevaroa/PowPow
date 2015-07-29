@@ -25,7 +25,6 @@ namespace PlayerScripts
             {
                 if (!Input.GetButton(player.crouchButton))
                 {
-                    player.crouching = false;
                     player.anim.SetBool("Crouching", false);
                     return player.statePool.GetState("IDLE");
                 }
