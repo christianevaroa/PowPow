@@ -200,9 +200,10 @@ namespace PlayerScripts
             }
         }
 
-        public void SetCrouching()
+        public void SetCrouching(bool val)
         {
-            crouching = !crouching;
+            crouching = val;
+            anim.SetBool("Crouching", val);
         }
 
         /// <summary>

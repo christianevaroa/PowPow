@@ -17,7 +17,8 @@ namespace PlayerScripts
 
         void IPlayerState.EnterState(PlayerMovementRB player)
         {
-
+            player.anim.SetFloat("Speed", player.currentSpeed);
+            player.SetCrouching(false);
         }
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
@@ -35,6 +36,10 @@ namespace PlayerScripts
             else if (Input.GetButtonDown(player.interactButton))
             {
                 player.Interact();
+            }
+            else if (Input.GetButtonDown(player.crouchButton))
+            {
+                return player.statePool.GetState("CRAWLING");
             }
 
             // Set animator speed and then if not moving go to Idle state

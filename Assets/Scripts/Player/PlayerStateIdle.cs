@@ -16,6 +16,7 @@ namespace PlayerScripts
 
         void IPlayerState.EnterState(PlayerMovementRB player)
         {
+            player.SetCrouching(false);
             player.anim.SetFloat("Speed", 0f);
         }
 
@@ -37,7 +38,6 @@ namespace PlayerScripts
                 }
                 else if (Input.GetButtonDown(player.crouchButton))
                 {
-                    player.crouching = true;
                     return player.statePool.GetState("CROUCHING");
                 }
             }

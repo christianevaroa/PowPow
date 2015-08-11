@@ -16,7 +16,7 @@ namespace PlayerScripts
 
         void IPlayerState.EnterState(PlayerMovementRB player)
         {
-
+            player.SetCrouching(true);
         }
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
@@ -38,7 +38,7 @@ namespace PlayerScripts
                     }
                     else
                     {
-                        return player.statePool.GetState("RUNNING");
+                        return player.statePool.GetState("MOVING");
                     }
                 }
             }

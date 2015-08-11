@@ -21,8 +21,6 @@ public class Throwable : MonoBehaviour {
 
     public int damageAmount;
 
-    string thrower;
-
 	// Use this for initialization
 	void Start () {
         beingCarried = CarriedState.NOT_CARRIED;
@@ -89,7 +87,7 @@ public class Throwable : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        if (beenThrown == ThrownState.THROWN)
+        if (beenThrown == ThrownState.THROWN && rb.velocity.magnitude > 0.5f)
         {
             if (other.collider.gameObject.tag == "Player" && other.collider.gameObject != holder)
             {
@@ -98,10 +96,5 @@ public class Throwable : MonoBehaviour {
                 otherPlayer.TakeDamage(new Damage(damageAmount, DamageType.PHYSICAL));
             }
         }
-    }
-
-    void OnAnimatorIK()
-    {
-
     }
 }

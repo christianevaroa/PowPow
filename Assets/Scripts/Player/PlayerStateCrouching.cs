@@ -16,7 +16,7 @@ namespace PlayerScripts
         void IPlayerState.EnterState(PlayerMovementRB player)
         {
             player.anim.SetFloat("Speed", 0f);
-            player.anim.SetBool("Crouching", true);
+            player.SetCrouching(true);
         }
 
         IPlayerState IPlayerState.Update(PlayerMovementRB player)
@@ -25,7 +25,6 @@ namespace PlayerScripts
             {
                 if (!Input.GetButton(player.crouchButton))
                 {
-                    player.anim.SetBool("Crouching", false);
                     return player.statePool.GetState("IDLE");
                 }
                 if (player.directionVector.sqrMagnitude != 0)
@@ -36,8 +35,6 @@ namespace PlayerScripts
 
             if (!player.grounded)
             {
-                player.crouching = false;
-                player.anim.SetBool("Crouching", false);
                 return player.statePool.GetState("FALLING");
             }
             return this;

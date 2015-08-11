@@ -25,6 +25,7 @@ namespace PlayerScripts
             //jumpTimer.StartTiming();
             if (player.controlState == ControlState.CONTROLLABLE)
             {
+                player.SetCrouching(false);
                 player.anim.SetBool("Falling", true);
                 player.col.material.dynamicFriction = 0f;
                 player.rb.AddForce(jumpForce, ForceMode.VelocityChange);
