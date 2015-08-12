@@ -17,6 +17,7 @@ public class RoundManager : MonoBehaviour {
     public GameObject playerPanelPrefab;
 
     RoundAudioManager ram;
+    RoundMusicManager rmm;
 
     public static int playersStillAlive;
     public PlayerStatus[] playerStatuses;
@@ -29,6 +30,7 @@ public class RoundManager : MonoBehaviour {
     void Awake()
     {
         ram = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<RoundAudioManager>();
+        rmm = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<RoundMusicManager>();
         FindPlayers();
     }
 
@@ -123,6 +125,7 @@ public class RoundManager : MonoBehaviour {
                 playerPanels[i].Win(false);
             }
         }
+        rmm.PlayOutro();
         roundRunning = false;
     }
 

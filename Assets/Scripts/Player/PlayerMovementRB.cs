@@ -180,7 +180,6 @@ namespace PlayerScripts
                 Ray pickupRay = new Ray(transform.position + transform.up * 0.5f, transform.forward);
                 if (Physics.Raycast(pickupRay, out hit, pickupRaycastDistance))
                 {
-                    Debug.Log(hit.collider);
                     if (hit.collider.tag == "Throwable")
                     {
                         // Object is a throwable, pick it up

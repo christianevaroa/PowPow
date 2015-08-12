@@ -4,6 +4,7 @@ using System.Collections;
 public class RoundMusicManager : MonoBehaviour {
 
     public AudioClip musicClip;
+    public AudioClip outroMusic;
     AudioSource audioSource;
 
 	// Use this for initialization
@@ -11,9 +12,10 @@ public class RoundMusicManager : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(musicClip);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public void PlayOutro()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(outroMusic);
+    }
 }

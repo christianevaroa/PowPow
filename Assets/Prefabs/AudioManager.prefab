@@ -8,10 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 407406}
+  - 114: {fileID: 11434930}
   - 82: {fileID: 8205818}
   m_Layer: 0
   m_Name: Music
-  m_TagString: Untagged
+  m_TagString: MusicManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,8 +70,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24357144, guid: 37ed9a85b871de64494d56939a10b1c9,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e0022277ac11f86428b8fe99d6c8c896, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: .5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -211,6 +212,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TICK_LOW: {fileID: 8300000, guid: 70596a06ccdb0794eaf37cc2f59332d1, type: 3}
   TICK_HIGH: {fileID: 8300000, guid: 8f92f2fce541f91488915d7e694113c5, type: 3}
+--- !u!114 &11434930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f16b6bbdde908145ba08116e6667fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicClip: {fileID: 8300000, guid: e0022277ac11f86428b8fe99d6c8c896, type: 3}
+  outroMusic: {fileID: 8300000, guid: c4133978ab1dee94ea07d8c0357fb18b, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

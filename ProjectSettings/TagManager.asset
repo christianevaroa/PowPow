@@ -11,6 +11,7 @@ TagManager:
   - PlayerNumText
   - HPText
   - LevelGeometry
+  - MusicManager
   layers:
   - Default
   - TransparentFX
