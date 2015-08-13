@@ -85,6 +85,7 @@ public class RoundManager : MonoBehaviour {
         for (int i = 0; i < playerStatuses.Length; i++)
         {
             Vector3 pos = new Vector3((i+1) * xSpacing, ySpacing, 0f);
+            Debug.Log(i + ": " + pos);
             GameObject panel = Instantiate(playerPanelPrefab, pos, Quaternion.identity) as GameObject;
             panel.transform.SetParent(HUD.transform);
             UIPlayerInfo panelInfo = panel.GetComponent<UIPlayerInfo>();
